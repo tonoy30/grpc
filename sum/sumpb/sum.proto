@@ -13,5 +13,6 @@ message Result {
 }
 
 service SumService {
+  // unary grpc
   rpc Sum(Input) returns (Result) {}
 }
