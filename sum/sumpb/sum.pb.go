@@ -233,6 +233,7 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type SumServiceClient interface {
+	// unary grpc
 	Sum(ctx context.Context, in *Input, opts ...grpc.CallOption) (*Result, error)
 }
 
@@ -255,6 +256,7 @@ func (c *sumServiceClient) Sum(ctx context.Context, in *Input, opts ...grpc.Call
 
 // SumServiceServer is the server API for SumService service.
 type SumServiceServer interface {
+	// unary grpc
 	Sum(context.Context, *Input) (*Result, error)
 }
 

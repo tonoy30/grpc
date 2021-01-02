@@ -6,6 +6,8 @@ import (
 	"learn-grpc/chat/chatpb"
 	"learn-grpc/greet"
 	"learn-grpc/greet/greetpb"
+	"learn-grpc/prime"
+	"learn-grpc/prime/primepb"
 	"learn-grpc/sum"
 	"learn-grpc/sum/sumpb"
 	"log"
@@ -21,12 +23,13 @@ func main() {
 	s := chat.Server{}
 	ss := sum.Server{}
 	gs := greet.Server{}
-
+	ps := prime.Server{}
 	grpcServer := grpc.NewServer()
 
 	chatpb.RegisterChatServiceServer(grpcServer, &s)
 	sumpb.RegisterSumServiceServer(grpcServer, &ss)
 	greetpb.RegisterGreetServiceServer(grpcServer, &gs)
+	primepb.RegisterPrimeServerServer(grpcServer, &ps)
 
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("Failed to serve gRPC server over port 9000: %v", err)

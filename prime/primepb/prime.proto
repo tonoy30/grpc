@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package prime;
+
+option go_package = "prime/primepb";
+
+message Prime {
+  int32 number = 1;
+}
+message Response {
+  int32 dividends = 1;
+}
+service PrimeServer {
+  rpc GetDividends(Prime) returns (stream Response){};
+}

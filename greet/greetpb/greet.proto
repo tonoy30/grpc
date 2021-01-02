@@ -10,4 +10,6 @@ message Greet {
 service GreetService {
   // unary grpc
   rpc Greeting(Greet) returns (Greet) {}
+  // server streaming
+  rpc GreetManyTimes(Greet) returns (stream Greet) {}
 }
