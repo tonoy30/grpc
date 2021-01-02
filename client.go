@@ -4,6 +4,7 @@ import (
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"learn-grpc/chat/chatpb"
+	"learn-grpc/sum/sumpb"
 	"log"
 )
 
@@ -16,10 +17,17 @@ func main() {
 	defer conn.Close()
 
 	c := chatpb.NewChatServiceClient(conn)
+	s := sumpb.NewSumServiceClient(conn)
 
 	response, err := c.SayHello(context.Background(), &chatpb.Message{Body: "Hello From Client!"})
 	if err != nil {
 		log.Fatalf("Error when calling SayHello: %s", err)
 	}
-	log.Printf("Response from server: %s", response.Body)
+	log.Printf("Response from server: %s\n", response.Body)
+
+	ans, err := s.Sum(context.Background(), &sumpb.Input{Num1: 2, Num2: 3})
+	if err != nil {
+		log.Fatalf("Error when calling Sum: %s", err)
+	}
+	log.Printf("Response from sum server: %d\n", ans.Ans)
 }
